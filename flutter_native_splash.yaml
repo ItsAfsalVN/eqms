@@ -1,11 +1,27 @@
 flutter_native_splash:
+  # Light Mode
   color: "#ffffff"
-  image: assets/images/splash.png
-  branding: assets/images/branding.png
+  image: assets/images/splash-light.png
+  branding: assets/images/branding-light.png
+
+  # Dark Mode
+  color_dark: "#0f0f0f"
+  image_dark: assets/images/splash-dark.png
+  branding_dark: assets/images/branding-dark.png
+
+  # Platform Toggles
   android: true
   ios: true
 
+  # Branding Alignment & Display
+  branding_mode: bottom 
+  fullscreen: true 
 
+  # Android 12+ Configuration
   android_12:
-    image: assets/images/splash.png
-    background_color: "#ffffff"
+    image: assets/images/splash-light.png
+    branding: assets/images/branding-light.png
+    color: "#ffffff"
+    color_dark: "#0f0f0f"
+    image_dark: assets/images/splash-dark.png
+    branding_dark: assets/images/branding-dark.png
