@@ -61,7 +61,7 @@ class InspectionCardWidget extends StatelessWidget {
                         item.subtitle.toUpperCase(),
                         style: theme.textTheme.labelSmall?.copyWith(
                           color: theme.colorScheme.onSurface.withValues(
-                            alpha: 0.5,
+                            alpha: 0.4,
                           ),
                           letterSpacing: 0.3,
                         ),

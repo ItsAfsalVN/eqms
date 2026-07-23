@@ -66,10 +66,26 @@ class LoginScreen extends StatelessWidget {
                     ),
                     Text(
                       "Sign in with your organizational Microsoft account to access your workspace.",
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.primary.withValues(alpha: 0.6),
+                      ),
                     ),
+
                     const SizedBox(height: 36.0),
                     AppActionButton(
+                      icon: SvgPicture.asset(
+                        "assets/icons/microsoft.svg",
+                        width: 24,
+                        height: 24,
+                        colorFilter: isLight
+                            ? null
+                            : const ColorFilter.mode(
+                                Colors.white,
+                                BlendMode.srcIn,
+                              ),
+                      ),
                       isLoading: isLoading,
                       onPressed: () {
                         Navigator.pushReplacementNamed(
