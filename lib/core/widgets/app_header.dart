@@ -49,7 +49,7 @@ class AppHeader extends StatelessWidget {
               Text(
                 userRole,
                 style: theme.textTheme.bodySmall?.copyWith(
-                  color: theme.colorScheme.secondary,
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
                   height: 1,
                 ),
               ),

@@ -1,6 +1,6 @@
 import 'package:eqms/core/themes/app_theme.dart';
 import 'package:eqms/features/auth/presentation/screens/login_screen.dart';
-import 'package:eqms/features/user_homepage/presentation/screens/user_dashboard.dart';
+import 'package:eqms/features/user/presentation/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 

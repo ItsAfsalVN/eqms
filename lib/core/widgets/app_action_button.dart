@@ -6,7 +6,7 @@ class AppActionButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
   final bool isLoading;
-  final double? width; // null = hug content, double.infinity = full width
+  final double? width;
 
   const AppActionButton({
     super.key,
@@ -22,7 +22,7 @@ class AppActionButton extends StatelessWidget {
       width: width ?? double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 12),
+          padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
@@ -37,7 +37,7 @@ class AppActionButton extends StatelessWidget {
               )
             : Text(
                 label,
-                style: TextStyle(
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Theme.of(context).colorScheme.onPrimary,
                 ),
               ),

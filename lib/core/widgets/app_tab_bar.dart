@@ -65,7 +65,7 @@ class _TabItem extends StatelessWidget {
             child: Text(
               title,
               textAlign: TextAlign.center,
-              style: theme.textTheme.titleMedium?.copyWith(
+              style: theme.textTheme.titleSmall?.copyWith(
                 color: isSelected
                     ? theme.colorScheme.onSurface
                     : theme.colorScheme.onSurfaceVariant,

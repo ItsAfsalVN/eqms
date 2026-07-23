@@ -9,9 +9,9 @@ import '../bloc/user_homepage_state.dart';
 import 'package:eqms/core/widgets/app_bottom_navigation.dart';
 import 'package:eqms/core/widgets/app_header.dart';
 
-import 'user_dashboard/calibration_page.dart';
-import 'user_dashboard/catch_test_page.dart';
-import 'user_dashboard/quality_check_page.dart';
+import 'tabs/calibration_page.dart';
+import 'tabs/catch_test_page.dart';
+import 'tabs/quality_check_page.dart';
 
 class UserDashboardPage extends StatefulWidget {
   const UserDashboardPage({super.key});

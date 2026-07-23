@@ -89,16 +89,16 @@ class QualityCheckPage extends StatelessWidget {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        spacing: 4,
         children: [
           Icon(
-            Icons.dashboard_outlined,
+            Icons.dashboard_rounded,
             size: 48,
             color: theme.colorScheme.primary,
           ),
-          const SizedBox(height: 12),
           Text(
             'Dashboard View',
-            style: theme.textTheme.titleLarge?.copyWith(
+            style: theme.textTheme.titleSmall?.copyWith(
               color: theme.colorScheme.primary,
             ),
           ),
