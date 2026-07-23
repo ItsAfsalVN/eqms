@@ -1,4 +1,5 @@
 import 'package:eqms/core/themes/app_theme.dart';
+import 'package:eqms/features/user_homepage/presentation/pages/user_homepage_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
@@ -28,9 +29,12 @@ class _AppState extends State<App> {
       title: 'OilDri EQMS App',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.system, // Dynamically supports system Light & Dark modes
       debugShowCheckedModeBanner: false,
-      home: const Scaffold(body: Center(child: Text('Hello, World!'))),
+      home: const UserHomepagePage(),
+      routes: {
+        '/user_homepage': (context) => const UserHomepagePage(),
+      },
     );
   }
 }
