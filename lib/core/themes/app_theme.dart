@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 abstract class AppColors {
@@ -28,20 +27,23 @@ abstract class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
-      colorScheme: ColorScheme(
-        primary: AppColors.primaryColor,
-        onPrimary: AppColors.onPrimaryColor,
-        secondary: AppColors.secondaryColor,
-        onSecondary: AppColors.onSecondaryColor,
-        surface: AppColors.surfaceColorLight,
-        onSurface: AppColors.onSurfaceColorLight,
+      colorScheme: const ColorScheme(
+        primary: AppColors.primaryColor,          // #013CA6
+        onPrimary: AppColors.onPrimaryColor,      // #FFFFFF
+        secondary: Color(0xFF7DA2F7),             // #7DA2F7 (Role text)
+        onSecondary: AppColors.onSecondaryColor,  // #FFFFFF
+        surface: AppColors.surfaceColorLight,     // #FFFFFF
+        onSurface: AppColors.onSurfaceColorLight, // #013CA6
+        onSurfaceVariant: Color(0xFF99B3DE),      // #99B3DE (Subtitle)
+        outline: Color(0xFFDCE7FC),               // Card border
+        outlineVariant: Color(0xFFB9CFFE),        // Section line
         error: AppColors.errorColor,
         onError: AppColors.onErrorColor,
         brightness: Brightness.light,
       ),
-
-      
-      scaffoldBackgroundColor: AppColors.backgroundColorLight
+      scaffoldBackgroundColor: AppColors.backgroundColorLight,
+      dividerColor: const Color(0xFFE5EEFF),
+      unselectedWidgetColor: const Color(0xFF7E8088),
     );
   }
 
@@ -49,18 +51,23 @@ abstract class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
-      colorScheme: ColorScheme(
-        primary: AppColors.secondaryColor,
-        onPrimary: AppColors.onSecondaryColor,
-        secondary: AppColors.primaryColor,
-        onSecondary: AppColors.onPrimaryColor,
-        surface: AppColors.surfaceColorDark,
-        onSurface: AppColors.onSurfaceColorDark,
+      colorScheme: const ColorScheme(
+        primary: AppColors.secondaryColor,         // #FF7B6E (Accent Coral)
+        onPrimary: AppColors.onSecondaryColor,     // #FFFFFF
+        secondary: Color(0xFF7DA2F7),             // #7DA2F7 (Role text)
+        onSecondary: AppColors.onSecondaryColor,  // #FFFFFF
+        surface: AppColors.surfaceColorDark,       // #1F1F1F
+        onSurface: Color(0xFFFFFFFF),             // #FFFFFF (White title text)
+        onSurfaceVariant: Color(0xFFA0A0A0),      // Subtitle
+        outline: Color(0xFF333333),               // Card border dark
+        outlineVariant: Color(0xFF444444),        // Section line dark
         error: AppColors.errorColor,
         onError: AppColors.onErrorColor,
         brightness: Brightness.dark,
       ),
-      scaffoldBackgroundColor: AppColors.backgroundColorDark
+      scaffoldBackgroundColor: AppColors.backgroundColorDark,
+      dividerColor: const Color(0xFF2C2C2C),
+      unselectedWidgetColor: const Color(0xFF8A8A8A),
     );
   }
 }
