@@ -7,9 +7,9 @@ import '../../domain/usecases/get_inspections.dart';
 import '../bloc/user_homepage_cubit.dart';
 import '../bloc/user_homepage_state.dart';
 import '../widgets/inspection_section_widget.dart';
-import '../widgets/user_homepage_bottom_nav.dart';
-import '../widgets/user_homepage_header.dart';
-import '../widgets/user_homepage_tab_bar.dart';
+import 'package:eqms/core/widgets/app_bottom_navigation.dart';
+import 'package:eqms/core/widgets/app_header.dart';
+import 'package:eqms/core/widgets/app_tab_bar.dart';
 
 class UserHomepagePage extends StatefulWidget {
   const UserHomepagePage({super.key});
@@ -55,28 +55,51 @@ class _UserHomepagePageState extends State<UserHomepagePage> {
               return Column(
                 children: [
                   // Top Header (Logo + Afsal VN QA Analyst)
-                  const UserHomepageHeader(
-                    userName: 'Afsal VN',
-                    userRole: 'QA Analyst',
-                  ),
+                  const AppHeader(userName: 'Afsal VN', userRole: 'QA Analyst'),
 
-                  // Tab Bar (Inspection Form / Dashboard)
-                  UserHomepageTabBar(
-                    selectedIndex: state.selectedTabIndex,
-                    onTabSelected: _cubit.setTabIndex,
-                  ),
-
-                  // Main Page Content Area
-                  Expanded(
-                    child: state.selectedTabIndex == 0
-                        ? _buildInspectionFormView(theme, state)
-                        : _buildDashboardView(theme),
-                  ),
+                  // Main Page Content Area (switch by bottom nav)
+                  if (state.selectedBottomNavIndex == 2) ...[
+                    // Quality Check: show tab bar + content
+                    AppTabBar(
+                      selectedIndex: state.selectedTabIndex,
+                      onTabSelected: _cubit.setTabIndex,
+                    ),
+                    Expanded(
+                      child: state.selectedTabIndex == 0
+                          ? _buildInspectionFormView(theme, state)
+                          : _buildDashboardView(theme),
+                    ),
+                  ] else ...[
+                    // Calibration / Catch Test: simple Coming Soon pages
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          state.selectedBottomNavIndex == 0
+                              ? 'Calibration — Coming Soon'
+                              : 'Catch Test — Coming Soon',
+                          style: theme.textTheme.titleLarge?.copyWith(
+                            color: theme.colorScheme.primary,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
 
                   // Bottom Navigation Bar
-                  UserHomepageBottomNav(
+                  AppBottomNavigation(
                     selectedIndex: state.selectedBottomNavIndex,
                     onItemSelected: _cubit.setBottomNavIndex,
+                    items: const [
+                      BottomNavItem(
+                        'Calibration',
+                        'assets/icons/caliberation.svg',
+                      ),
+                      BottomNavItem('Catch Test', 'assets/icons/scale.svg'),
+                      BottomNavItem(
+                        'Quality Check',
+                        'assets/icons/qualitycheck.svg',
+                      ),
+                    ],
                   ),
                 ],
               );

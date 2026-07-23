@@ -1,6 +1,6 @@
 import 'package:eqms/core/themes/app_theme.dart';
 import 'package:eqms/features/auth/presentation/screens/login_screen.dart';
-import 'package:eqms/features/user_homepage/presentation/screens/user_homepage_page.dart';
+import 'package:eqms/features/user_homepage/presentation/screens/user_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
@@ -35,7 +35,7 @@ class _AppState extends State<App> {
       home: const LoginScreen(),
       routes: {
         '/login': (context) => const LoginScreen(),
-        '/user_homepage': (context) => const UserHomepagePage(),
+        '/user_homepage': (context) => const UserDashboardPage(),
       },
     );
   }
