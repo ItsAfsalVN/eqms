@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 abstract class AppColors {
   static const Color primaryColor = Color(0xFF013CA6);
   static const Color onPrimaryColor = Color(0xFFFFFFFF);
-  
+
   static const Color secondaryColor = Color(0xFFFF7B6E);
   static const Color onSecondaryColor = Color(0xFFFFFFFF);
 
@@ -23,6 +23,75 @@ abstract class AppColors {
 }
 
 abstract class AppTheme {
+  static TextTheme _buildTextTheme({
+    required Color headingColor,
+    required Color bodyColor,
+    required Color labelColor,
+  }) {
+    return TextTheme(
+      displayLarge: const TextStyle(
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.w700,
+      ).copyWith(color: headingColor),
+      displayMedium: const TextStyle(
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.w700,
+      ).copyWith(color: headingColor),
+      displaySmall: const TextStyle(
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.w700,
+      ).copyWith(color: headingColor),
+      headlineLarge: const TextStyle(
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.w700,
+      ).copyWith(color: headingColor),
+      headlineMedium: const TextStyle(
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.w700,
+      ).copyWith(color: headingColor),
+      headlineSmall: const TextStyle(
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.w700,
+      ).copyWith(color: headingColor),
+      titleLarge: const TextStyle(
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.w600,
+      ).copyWith(color: bodyColor),
+      titleMedium: const TextStyle(
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.w600,
+      ).copyWith(color: bodyColor),
+      titleSmall: const TextStyle(
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.w600,
+      ).copyWith(color: bodyColor),
+      bodyLarge: const TextStyle(
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.w400,
+      ).copyWith(color: bodyColor),
+      bodyMedium: const TextStyle(
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.w400,
+      ).copyWith(color: bodyColor),
+      bodySmall: const TextStyle(
+        fontFamily: 'Urbanist',
+        fontWeight: FontWeight.w400,
+      ).copyWith(color: bodyColor),
+      labelLarge: const TextStyle(
+        fontFamily: 'Viga',
+        fontWeight: FontWeight.w400,
+      ).copyWith(color: labelColor),
+      labelMedium: const TextStyle(
+        fontFamily: 'Viga',
+        fontWeight: FontWeight.w400,
+      ).copyWith(color: labelColor),
+      labelSmall: const TextStyle(
+        fontFamily: 'Viga',
+        fontWeight: FontWeight.w400,
+      ).copyWith(color: labelColor),
+    );
+  }
+
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
