@@ -1,12 +1,14 @@
 // lib/core/widgets/app_action_button.dart
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AppActionButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
   final bool isLoading;
   final double? width;
+  final SvgPicture? icon;
 
   const AppActionButton({
     super.key,
@@ -14,6 +16,7 @@ class AppActionButton extends StatelessWidget {
     required this.onPressed,
     this.isLoading = false,
     this.width,
+    this.icon,
   });
 
   @override
@@ -35,11 +38,20 @@ class AppActionButton extends StatelessWidget {
                 width: 20,
                 child: CircularProgressIndicator(strokeWidth: 2),
               )
-            : Text(
-                label,
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.onPrimary,
-                ),
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                spacing: icon != null
+                    ? 8.0
+                    : 0.0, // Add spacing if icon is present
+                children: [
+                  ?icon,
+                  Text(
+                    label,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                      color: Theme.of(context).colorScheme.onPrimary,
+                    ),
+                  ),
+                ],
               ),
       ),
     );
