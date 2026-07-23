@@ -96,19 +96,25 @@ abstract class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
+      fontFamily: 'Urbanist',
       colorScheme: const ColorScheme(
-        primary: AppColors.primaryColor,          // #013CA6
-        onPrimary: AppColors.onPrimaryColor,      // #FFFFFF
-        secondary: Color(0xFF7DA2F7),             // #7DA2F7 (Role text)
-        onSecondary: AppColors.onSecondaryColor,  // #FFFFFF
-        surface: AppColors.surfaceColorLight,     // #FFFFFF
+        primary: AppColors.primaryColor, // #013CA6
+        onPrimary: AppColors.onPrimaryColor, // #FFFFFF
+        secondary: Color(0xFF7DA2F7), // #7DA2F7 (Role text)
+        onSecondary: AppColors.onSecondaryColor, // #FFFFFF
+        surface: AppColors.surfaceColorLight, // #FFFFFF
         onSurface: AppColors.onSurfaceColorLight, // #013CA6
-        onSurfaceVariant: Color(0xFF99B3DE),      // #99B3DE (Subtitle)
-        outline: Color(0xFFDCE7FC),               // Card border
-        outlineVariant: Color(0xFFB9CFFE),        // Section line
+        onSurfaceVariant: Color(0xFF99B3DE), // #99B3DE (Subtitle)
+        outline: Color(0xFFDCE7FC), // Card border
+        outlineVariant: Color(0xFFB9CFFE), // Section line
         error: AppColors.errorColor,
         onError: AppColors.onErrorColor,
         brightness: Brightness.light,
+      ),
+      textTheme: _buildTextTheme(
+        headingColor: AppColors.primaryColor,
+        bodyColor: AppColors.onSurfaceColorLight,
+        labelColor: AppColors.onSurfaceColorLight,
       ),
       scaffoldBackgroundColor: AppColors.backgroundColorLight,
       dividerColor: const Color(0xFFE5EEFF),
@@ -120,19 +126,25 @@ abstract class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.dark,
+      fontFamily: 'Urbanist',
       colorScheme: const ColorScheme(
-        primary: AppColors.secondaryColor,         // #FF7B6E (Accent Coral)
-        onPrimary: AppColors.onSecondaryColor,     // #FFFFFF
-        secondary: Color(0xFF7DA2F7),             // #7DA2F7 (Role text)
-        onSecondary: AppColors.onSecondaryColor,  // #FFFFFF
-        surface: AppColors.surfaceColorDark,       // #1F1F1F
-        onSurface: Color(0xFFFFFFFF),             // #FFFFFF (White title text)
-        onSurfaceVariant: Color(0xFFA0A0A0),      // Subtitle
-        outline: Color(0xFF333333),               // Card border dark
-        outlineVariant: Color(0xFF444444),        // Section line dark
+        primary: AppColors.secondaryColor, // #FF7B6E (Accent Coral)
+        onPrimary: AppColors.onSecondaryColor, // #FFFFFF
+        secondary: Color(0xFF7DA2F7), // #7DA2F7 (Role text)
+        onSecondary: AppColors.onSecondaryColor, // #FFFFFF
+        surface: AppColors.surfaceColorDark, // #1F1F1F
+        onSurface: Color(0xFFFFFFFF), // #FFFFFF (White title text)
+        onSurfaceVariant: Color(0xFFA0A0A0), // Subtitle
+        outline: Color(0xFF333333), // Card border dark
+        outlineVariant: Color(0xFF444444), // Section line dark
         error: AppColors.errorColor,
         onError: AppColors.onErrorColor,
         brightness: Brightness.dark,
+      ),
+      textTheme: _buildTextTheme(
+        headingColor: AppColors.secondaryColor,
+        bodyColor: AppColors.onSurfaceColorDark,
+        labelColor: AppColors.onSurfaceColorDark,
       ),
       scaffoldBackgroundColor: AppColors.backgroundColorDark,
       dividerColor: const Color(0xFF2C2C2C),

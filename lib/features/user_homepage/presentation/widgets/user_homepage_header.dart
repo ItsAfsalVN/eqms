@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'custom_icons.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class UserHomepageHeader extends StatelessWidget {
   final String userName;
@@ -14,8 +14,6 @@ class UserHomepageHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    final primaryColor = theme.colorScheme.primary;
 
     return Container(
       color: theme.colorScheme.surface,
@@ -25,7 +23,15 @@ class UserHomepageHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // Logo
-          AppDropLogo(size: 34, color: primaryColor),
+          SvgPicture.asset(
+            'assets/icons/user.svg',
+            width: 34,
+            height: 34,
+            colorFilter: ColorFilter.mode(
+              theme.colorScheme.onSurface,
+              BlendMode.srcIn,
+            ),
+          ),
 
           // User details
           Column(
@@ -34,21 +40,15 @@ class UserHomepageHeader extends StatelessWidget {
             children: [
               Text(
                 userName,
-                style: TextStyle(
-                  fontFamily: 'Urbanist',
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700,
-                  color: isDark ? Colors.white : primaryColor,
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  color: theme.colorScheme.onSurface,
                   height: 1.1,
                 ),
               ),
               const SizedBox(height: 2),
               Text(
                 userRole,
-                style: TextStyle(
-                  fontFamily: 'Urbanist',
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
+                style: theme.textTheme.bodySmall?.copyWith(
                   color: theme.colorScheme.secondary,
                 ),
               ),

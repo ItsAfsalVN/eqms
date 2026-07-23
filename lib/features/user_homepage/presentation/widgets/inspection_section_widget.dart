@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../domain/entities/inspection_section.dart';
 import 'inspection_card_widget.dart';
 
@@ -19,8 +20,6 @@ class InspectionSectionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    final primaryColor = theme.colorScheme.primary;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,29 +36,27 @@ class InspectionSectionWidget extends StatelessWidget {
                 children: [
                   Text(
                     section.title,
-                    style: TextStyle(
-                      fontFamily: 'Urbanist',
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                      color: isDark ? Colors.white : primaryColor,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      color: theme.colorScheme.onSurface,
                     ),
                   ),
                   AnimatedRotation(
                     turns: isCollapsed ? -0.25 : 0,
                     duration: const Duration(milliseconds: 200),
-                    child: Icon(
-                      Icons.arrow_downward_rounded,
-                      size: 18,
-                      color: isDark ? Colors.white : primaryColor,
+                    child: SvgPicture.asset(
+                      'assets/icons/qualitycheck.svg',
+                      width: 18,
+                      height: 18,
+                      colorFilter: ColorFilter.mode(
+                        theme.colorScheme.onSurface,
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 6),
-              Container(
-                height: 1.2,
-                color: theme.colorScheme.outlineVariant,
-              ),
+              Container(height: 1.2, color: theme.colorScheme.outlineVariant),
             ],
           ),
         ),

@@ -1,41 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../domain/entities/inspection_item.dart';
-import 'custom_icons.dart';
 
 class InspectionCardWidget extends StatelessWidget {
   final InspectionItem item;
   final VoidCallback? onTap;
 
-  const InspectionCardWidget({
-    super.key,
-    required this.item,
-    this.onTap,
-  });
+  const InspectionCardWidget({super.key, required this.item, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final surfaceShadowColor = theme.colorScheme.primary.withValues(
+      alpha: 0.05,
+    );
+    final darkShadowColor = theme.colorScheme.onSurface.withValues(alpha: 0.18);
 
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: theme.colorScheme.outline,
-          width: 1,
-        ),
+        border: Border.all(color: theme.colorScheme.outline, width: 1),
         boxShadow: [
           BoxShadow(
-            color: isDark ? const Color(0x30000000) : const Color(0x05013CA6),
+            color: isDark ? darkShadowColor : surfaceShadowColor,
             blurRadius: 6,
             offset: const Offset(0, 2),
           ),
         ],
       ),
       child: Material(
-        color: Colors.transparent,
         borderRadius: BorderRadius.circular(10),
         child: InkWell(
           onTap: onTap,
@@ -51,21 +47,15 @@ class InspectionCardWidget extends StatelessWidget {
                     children: [
                       Text(
                         item.title,
-                        style: TextStyle(
-                          fontFamily: 'Urbanist',
-                          fontSize: 16,
-                          fontWeight: FontWeight.w700,
-                          color: isDark ? Colors.white : theme.colorScheme.primary,
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          color: theme.colorScheme.onSurface,
                           height: 1.25,
                         ),
                       ),
                       const SizedBox(height: 6),
                       Text(
                         item.subtitle.toUpperCase(),
-                        style: TextStyle(
-                          fontFamily: 'Urbanist',
-                          fontSize: 10,
-                          fontWeight: FontWeight.w700,
+                        style: theme.textTheme.labelSmall?.copyWith(
                           color: theme.colorScheme.onSurfaceVariant,
                           letterSpacing: 0.3,
                         ),
@@ -74,9 +64,14 @@ class InspectionCardWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 12),
-                RightArrowIcon(
-                  size: 20,
-                  color: isDark ? Colors.white : Colors.black,
+                SvgPicture.asset(
+                  'assets/icons/dashboard.svg',
+                  width: 20,
+                  height: 20,
+                  colorFilter: ColorFilter.mode(
+                    theme.colorScheme.onSurface,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ],
             ),

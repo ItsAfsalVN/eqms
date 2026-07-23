@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'custom_icons.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class UserHomepageBottomNav extends StatelessWidget {
   final int selectedIndex;
@@ -15,21 +15,15 @@ class UserHomepageBottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final unselectedColor = theme.unselectedWidgetColor;
+    final selectedIconColor = theme.colorScheme.onPrimary;
 
     return Container(
       decoration: BoxDecoration(
         color: theme.colorScheme.surface,
-        border: Border(
-          top: BorderSide(
-            color: theme.dividerColor,
-            width: 0.8,
-          ),
-        ),
+        border: Border(top: BorderSide(color: theme.dividerColor, width: 0.8)),
         boxShadow: [
           BoxShadow(
-            color: theme.brightness == Brightness.light
-                ? const Color(0x0A000000)
-                : const Color(0x30000000),
+            color: theme.colorScheme.onSurface.withValues(alpha: 0.08),
             blurRadius: 10,
             offset: const Offset(0, -2),
           ),
@@ -45,9 +39,14 @@ class UserHomepageBottomNav extends StatelessWidget {
               index: 0,
               label: 'Calibration',
               isSelected: selectedIndex == 0,
-              iconBuilder: (isSelected) => CalibrationIcon(
-                size: 22,
-                color: isSelected ? theme.colorScheme.onPrimary : unselectedColor,
+              iconBuilder: (isSelected) => SvgPicture.asset(
+                'assets/icons/caliberation.svg',
+                width: 22,
+                height: 22,
+                colorFilter: ColorFilter.mode(
+                  isSelected ? selectedIconColor : unselectedColor,
+                  BlendMode.srcIn,
+                ),
               ),
               onTap: () => onItemSelected(0),
             ),
@@ -55,9 +54,14 @@ class UserHomepageBottomNav extends StatelessWidget {
               index: 1,
               label: 'Catch Test',
               isSelected: selectedIndex == 1,
-              iconBuilder: (isSelected) => CatchTestIcon(
-                size: 22,
-                color: isSelected ? theme.colorScheme.onPrimary : unselectedColor,
+              iconBuilder: (isSelected) => SvgPicture.asset(
+                'assets/icons/scale.svg',
+                width: 22,
+                height: 22,
+                colorFilter: ColorFilter.mode(
+                  isSelected ? selectedIconColor : unselectedColor,
+                  BlendMode.srcIn,
+                ),
               ),
               onTap: () => onItemSelected(1),
             ),
@@ -65,9 +69,14 @@ class UserHomepageBottomNav extends StatelessWidget {
               index: 2,
               label: 'Quality Check',
               isSelected: selectedIndex == 2,
-              iconBuilder: (isSelected) => QualityCheckBadgeIcon(
-                size: 22,
-                color: isSelected ? theme.colorScheme.onPrimary : unselectedColor,
+              iconBuilder: (isSelected) => SvgPicture.asset(
+                'assets/icons/qualitycheck.svg',
+                width: 22,
+                height: 22,
+                colorFilter: ColorFilter.mode(
+                  isSelected ? selectedIconColor : unselectedColor,
+                  BlendMode.srcIn,
+                ),
               ),
               onTap: () => onItemSelected(2),
             ),
@@ -96,7 +105,6 @@ class _NavItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
     final primaryColor = theme.colorScheme.primary;
     final unselectedColor = theme.unselectedWidgetColor;
 
@@ -109,8 +117,10 @@ class _NavItem extends StatelessWidget {
           // Icon or Pill container
           isSelected
               ? Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 26, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 26,
+                    vertical: 8,
+                  ),
                   decoration: BoxDecoration(
                     color: primaryColor,
                     borderRadius: BorderRadius.circular(22),
@@ -124,13 +134,9 @@ class _NavItem extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             label,
-            style: TextStyle(
-              fontFamily: 'Urbanist',
-              fontSize: 12,
+            style: theme.textTheme.labelSmall?.copyWith(
               fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-              color: isSelected
-                  ? (isDark ? Colors.white : primaryColor)
-                  : unselectedColor,
+              color: isSelected ? theme.colorScheme.onSurface : unselectedColor,
             ),
           ),
         ],

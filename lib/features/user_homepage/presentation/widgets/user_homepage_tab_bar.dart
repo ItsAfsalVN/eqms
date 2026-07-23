@@ -36,10 +36,7 @@ class UserHomepageTabBar extends StatelessWidget {
               ),
             ],
           ),
-          Container(
-            height: 1,
-            color: theme.dividerColor,
-          ),
+          Container(height: 1, color: theme.dividerColor),
         ],
       ),
     );
@@ -60,7 +57,6 @@ class _TabItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
     final primaryColor = theme.colorScheme.primary;
 
     return GestureDetector(
@@ -74,20 +70,17 @@ class _TabItem extends StatelessWidget {
             child: Text(
               title,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: 'Urbanist',
-                fontSize: 17,
-                fontWeight: FontWeight.w700,
+              style: theme.textTheme.titleMedium?.copyWith(
                 color: isSelected
-                    ? (isDark ? Colors.white : primaryColor)
-                    : (isDark ? Colors.white60 : theme.colorScheme.onSurface.withValues(alpha: 0.7)),
+                    ? theme.colorScheme.onSurface
+                    : theme.colorScheme.onSurfaceVariant,
               ),
             ),
           ),
           Container(
             height: 3,
             decoration: BoxDecoration(
-              color: isSelected ? primaryColor : Colors.transparent,
+              color: isSelected ? primaryColor : theme.colorScheme.surface,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(2),
                 topRight: Radius.circular(2),
