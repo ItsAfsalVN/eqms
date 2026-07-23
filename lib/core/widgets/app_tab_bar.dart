@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-class UserHomepageTabBar extends StatelessWidget {
+class AppTabBar extends StatelessWidget {
   final int selectedIndex;
   final ValueChanged<int> onTabSelected;
+  final List<String> tabs;
 
-  const UserHomepageTabBar({
+  const AppTabBar({
     super.key,
     required this.selectedIndex,
     required this.onTabSelected,
+    this.tabs = const ['Inspection Form', 'Dashboard'],
   });
 
   @override
@@ -19,27 +21,18 @@ class UserHomepageTabBar extends StatelessWidget {
       child: Column(
         children: [
           Row(
-            children: [
-              Expanded(
+            children: List.generate(
+              tabs.length,
+              (i) => Expanded(
                 child: _TabItem(
-                  title: 'Inspection Form',
-                  isSelected: selectedIndex == 0,
-                  onTap: () => onTabSelected(0),
+                  title: tabs[i],
+                  isSelected: selectedIndex == i,
+                  onTap: () => onTabSelected(i),
                 ),
               ),
-              Expanded(
-                child: _TabItem(
-                  title: 'Dashboard',
-                  isSelected: selectedIndex == 1,
-                  onTap: () => onTabSelected(1),
-                ),
-              ),
-            ],
+            ),
           ),
-          Container(
-            height: 1,
-            color: theme.dividerColor,
-          ),
+          Container(height: 1, color: theme.dividerColor),
         ],
       ),
     );
@@ -60,8 +53,6 @@ class _TabItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    final primaryColor = theme.colorScheme.primary;
 
     return GestureDetector(
       onTap: onTap,
@@ -74,20 +65,19 @@ class _TabItem extends StatelessWidget {
             child: Text(
               title,
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: 'Urbanist',
-                fontSize: 17,
-                fontWeight: FontWeight.w700,
+              style: theme.textTheme.titleSmall?.copyWith(
                 color: isSelected
-                    ? (isDark ? Colors.white : primaryColor)
-                    : (isDark ? Colors.white60 : theme.colorScheme.onSurface.withValues(alpha: 0.7)),
+                    ? theme.colorScheme.onSurface
+                    : theme.colorScheme.onSurfaceVariant,
               ),
             ),
           ),
           Container(
             height: 3,
             decoration: BoxDecoration(
-              color: isSelected ? primaryColor : Colors.transparent,
+              color: isSelected
+                  ? theme.colorScheme.primary
+                  : theme.colorScheme.surface,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(2),
                 topRight: Radius.circular(2),

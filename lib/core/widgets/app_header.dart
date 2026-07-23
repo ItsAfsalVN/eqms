@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'custom_icons.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-class UserHomepageHeader extends StatelessWidget {
+class AppHeader extends StatelessWidget {
   final String userName;
   final String userRole;
 
-  const UserHomepageHeader({
+  const AppHeader({
     super.key,
     this.userName = 'Afsal VN',
     this.userRole = 'QA Analyst',
@@ -14,42 +14,43 @@ class UserHomepageHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-    final primaryColor = theme.colorScheme.primary;
 
     return Container(
       color: theme.colorScheme.surface,
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           // Logo
-          AppDropLogo(size: 34, color: primaryColor),
+          SvgPicture.asset(
+            'assets/images/logo-light.svg',
+            width: 40,
+            height: 40,
+            colorFilter: ColorFilter.mode(
+              theme.colorScheme.onSurface,
+              BlendMode.srcIn,
+            ),
+          ),
 
           // User details
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
+            spacing: 1,
             children: [
               Text(
                 userName,
-                style: TextStyle(
-                  fontFamily: 'Urbanist',
-                  fontSize: 22,
-                  fontWeight: FontWeight.w700,
-                  color: isDark ? Colors.white : primaryColor,
-                  height: 1.1,
+                style: theme.textTheme.headlineSmall?.copyWith(
+                  color: theme.colorScheme.onSurface,
+                  height: 1,
                 ),
               ),
-              const SizedBox(height: 2),
               Text(
                 userRole,
-                style: TextStyle(
-                  fontFamily: 'Urbanist',
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                  color: theme.colorScheme.secondary,
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
+                  height: 1,
                 ),
               ),
             ],
