@@ -8,6 +8,7 @@ import '../bloc/user_homepage_cubit.dart';
 import '../bloc/user_homepage_state.dart';
 import 'package:eqms/core/widgets/app_bottom_navigation.dart';
 import 'package:eqms/core/widgets/app_header.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'tabs/calibration_page.dart';
 import 'tabs/catch_test_page.dart';
@@ -46,50 +47,68 @@ class _UserDashboardPageState extends State<UserDashboardPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
-      body: SafeArea(
-        child: BlocProvider.value(
-          value: _cubit,
-          child: BlocBuilder<UserHomepageCubit, UserHomepageState>(
-            builder: (context, state) {
-              Widget body;
-              switch (state.selectedBottomNavIndex) {
-                case 0:
-                  body = const CalibrationPage();
-                  break;
-                case 1:
-                  body = const CatchTestPage();
-                  break;
-                case 2:
-                default:
-                  body = const QualityCheckPage();
-              }
+    return BlocProvider.value(
+      value: _cubit,
+      child: BlocBuilder<UserHomepageCubit, UserHomepageState>(
+        builder: (context, state) {
+          Widget body;
+          switch (state.selectedBottomNavIndex) {
+            case 0:
+              body = const CalibrationPage();
+              break;
+            case 1:
+              body = const CatchTestPage();
+              break;
+            case 2:
+            default:
+              body = const QualityCheckPage();
+          }
 
-              return Column(
+          return Scaffold(
+            backgroundColor: theme.scaffoldBackgroundColor,
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+            floatingActionButton: (state.selectedBottomNavIndex == 2 && state.selectedTabIndex == 1)
+                ? FloatingActionButton(
+                    onPressed: () {},
+                    backgroundColor: const Color(0xFF013CA6),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: SvgPicture.asset(
+                      'assets/icons/pen.svg',
+                      height: 24,
+                      colorFilter: const ColorFilter.mode(
+                        Colors.white,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  )
+                : const SizedBox.shrink(),
+            body: SafeArea(
+              child: Column(
                 children: [
                   const AppHeader(userName: 'Afsal VN', userRole: 'QA Analyst'),
                   Expanded(child: body),
-                  AppBottomNavigation(
-                    selectedIndex: state.selectedBottomNavIndex,
-                    onItemSelected: _cubit.setBottomNavIndex,
-                    items: const [
-                      BottomNavItem(
-                        'Calibration',
-                        'assets/icons/caliberation.svg',
-                      ),
-                      BottomNavItem('Catch Test', 'assets/icons/scale.svg'),
-                      BottomNavItem(
-                        'Quality Check',
-                        'assets/icons/qualitycheck.svg',
-                      ),
-                    ],
-                  ),
                 ],
-              );
-            },
-          ),
-        ),
+              ),
+            ),
+            bottomNavigationBar: AppBottomNavigation(
+              selectedIndex: state.selectedBottomNavIndex,
+              onItemSelected: _cubit.setBottomNavIndex,
+              items: const [
+                BottomNavItem(
+                  'Calibration',
+                  'assets/icons/caliberation.svg',
+                ),
+                BottomNavItem('Catch Test', 'assets/icons/scale.svg'),
+                BottomNavItem(
+                  'Quality Check',
+                  'assets/icons/qualitycheck.svg',
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

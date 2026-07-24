@@ -4,7 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/user_homepage_cubit.dart';
 import '../../bloc/user_homepage_state.dart';
 import '../../widgets/inspection_section_widget.dart';
+import '../../widgets/user_dashboard_widget.dart';
 import 'package:eqms/core/widgets/app_tab_bar.dart';
+import '../inspection_detail_page.dart';
 
 class QualityCheckPage extends StatelessWidget {
   const QualityCheckPage({super.key});
@@ -71,11 +73,10 @@ class QualityCheckPage extends StatelessWidget {
             isCollapsed: isCollapsed,
             onToggleCollapse: () => cubit.toggleSectionCollapse(section.id),
             onItemTap: (itemId) {
-              ScaffoldMessenger.of(context).hideCurrentSnackBar();
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Opening inspection: $itemId'),
-                  duration: const Duration(seconds: 1),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const InspectionDetailPage(),
                 ),
               );
             },
@@ -86,24 +87,6 @@ class QualityCheckPage extends StatelessWidget {
   }
 
   Widget _buildDashboardView(ThemeData theme) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        spacing: 4,
-        children: [
-          Icon(
-            Icons.dashboard_rounded,
-            size: 48,
-            color: theme.colorScheme.primary,
-          ),
-          Text(
-            'Dashboard View',
-            style: theme.textTheme.titleSmall?.copyWith(
-              color: theme.colorScheme.primary,
-            ),
-          ),
-        ],
-      ),
-    );
+    return const UserDashboardWidget();
   }
 }
